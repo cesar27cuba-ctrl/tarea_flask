@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Users</title>{% endblock %}
+
+{% block content %}
+<h1>Bienvenido a Mis Users</h1>
+<p>Algunos users acontinuación:</p>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>DNI</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo Electrónico</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Fecha de Creación</th>
+                <th>Fecha de Actualización</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user['id'] }}</td>
+                    <td>{{ user['dni'] }}</td>
+                    <td>{{ user['given_name'] }}</td>
+                    <td>{{ user['family_name'] }}</td>
+                    <td>{{ user['email'] }}</td>
+                    <td>{{ user['phone_number'] }}</td>
+                    <td>{{ user['direccion'] }}</td>
+                    <td>{{ user['created_at'] }}</td>
+                    <td>{{ user['updated_at'] }}</td>
+                    <td>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</a>
+{% endblock %}
