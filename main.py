@@ -18,8 +18,11 @@ def get_db():
 
 
 
-@app.route('/')
-def hello_world():
-    return render_template('index.html')
+@app.route('/users', methods=['GET'])
+def list_users():
+    connection = get_db()
+    users_data = connection.execute("SELECT * FROM users").fetchall()
+    connection.close()
+    return render_template('index.html', users_list = users_data)
 
 
