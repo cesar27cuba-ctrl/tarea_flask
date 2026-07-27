@@ -1,7 +1,7 @@
 import sqlite3
 import os
 
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -16,13 +16,29 @@ def get_db():
     return db
 
 
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('base.html')
 
 
-@app.route('/users', methods=['GET'])
+@app.route('/texto', methods=['GET'])
+def text():
+    return "hola con todos"
+
+
+@app.route('/user', methods=['GET'])
 def list_users():
     connection = get_db()
     users_data = connection.execute("SELECT * FROM users").fetchall()
     connection.close()
-    return render_template('index.html', users_list = users_data)
+    return render_template('index.html', users_list=users_data)
+
+
+@app.route('/api/users', methods=['GET'])
+def list_users_json():
+    connection = get_db()
+    users_data = connection.execute("SELECT * FROM users").fetchall()
+    connection.close()
+    return jsonify(users_data)
 
 
